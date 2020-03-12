@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-Hant" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>My First Vue Example</title>
+    <script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+    <link href="../images/favicon.png" rel="icon" type="image/x-icon">
+</head>
+
+<body>
+	<div id="example">
+		{{ message }}
+		<hr/>
+		<pre>
+		data : {
+			message : 'My First Vue Example.',
+			url : 'https://google.com.tw/',
+			inputMessage : '',
+			textMessage : 'Text Message',
+			htmlMessage : '&lt;img src="../images/favicon.png"&gt;',
+			counter : 0,
+			counterByMethod : 0,
+			isShow : false,
+			department : [
+				{id:"A3026", name:"Hans", ext:"3315"},
+				{id:"A4055", name:"Summer", ext:"2270"}
+			]
+		}
+		</pre>
+		<hr/>
+		<div>
+			<h3>Run with v-bind:attribute & :attribute</h3>
+			<a v-bind:href="url" target="_blank">Doing with v-bind:attribute</a>
+			<pre>&lt;a v-bind:href="url" target="_blank" /&gt;</pre> <br />
+			<a :href="url" target="_blank">Doing with :attribute</a>
+			<pre>&lt;a :href="url" target="_blank" /&gt;</pre> <br />
+		</div>
+		<hr/>
+		<div>
+			<h3>Run with v-model</h3>
+			Here is : {{ inputMessage }} <br />
+			<input type="text" v-model="inputMessage" placeholder="Edit Me Plz." />
+			<pre>&lt;input type="text" v-model="inputMessage" placeholder="Edit Me Plz." /&gt;</pre>
+		</div>
+		<hr/>
+		<div>
+			<h3>Run with v-text</h3>
+			<div v-text="textMessage">123456</div>
+			<pre>&lt;div v-text="textMessage"&gt;&lt;/div&gt;</pre>
+			<input type="text" v-model="textMessage" placeholder="Cover Text Message." />
+		</div>
+		<hr/>
+		<div>
+			<h3>Run with v-html</h3>
+			<div v-html="htmlMessage"></div>
+			<pre>&lt;div v-html="htmlMessage"&gt;&lt;/div&gt;</pre>
+			<div v-text="htmlMessage"></div>
+			<pre>&lt;div v-text="htmlMessage"&gt;&lt;/div&gt;</pre>
+		</div>
+		<hr/>
+		<div>
+			<div>
+				<h3>Run with v-on & @</h3>
+				<h4>Change data directly :</h4>
+				<button v-on:click="counter += 1">Add 1 By v-on:click</button>
+				<pre>&lt;button v-on:click="counter += 1"&gt;Add 1 By v-on:click&lt;/button&gt;</pre>
+				<button @click="counter += 2">Add 2 by @click</button>
+				<pre>&lt;button @click="counter += 2"&gt;Add 2 by @click&lt;/button&gt;</pre>
+	  			<p>The button above has been clicked {{ counter }} times.</p>
+	  			——————————————————————————
+				<h4>Change data with method :</h4>
+				<button v-on:click="addOneTimes">Add 1 By Registered Method</button>
+				<pre>&lt;button v-on:click="addOneTimes"&gt;Add 1 By Registered Method&lt;/button&gt;</pre>
+	  			<p>The button above has been clicked {{ counterByMethod }} times.</p>
+<pre>
+addOneTimes: function (event) {
+   alert('You have already clicked me about ' + this.counterByMethod + ' times!')
+   this.counterByMethod ++;
+}
+</pre>
+			</div>
+		</div>
+		<hr/>
+		<div>
+			<div>
+				<h3>Run with v-if & v-show</h3>
+				<b>v-if :</b>
+				<span v-if="isShow">Now You See Me.</span>
+				<pre>&lt;span v-if="isShow"&gt;Now You See Me.&lt;/span&gt;</pre>
+				<br />
+				<b>v-show :</b>
+				<span v-show="isShow">Now You See Me.</span>
+				<pre>&lt;span v-show="isShow"&gt;Now You See Me.&lt;/span&gt;</pre>
+				<br />
+				<button v-on:click="toggleShow">Click to Toggle</button>
+				<pre>&lt;button v-on:click="toggleShow"&gt;Click to Toggle&lt;/button&gt;</pre>
+<pre>
+toggleShow : function() {
+	this.isShow = !this.isShow;
+}
+</pre>
+			</div>
+		</div>
+		<hr/>
+		<div>
+			<div>
+				<h3>Run with v-for</h3>
+				<table border="1">
+					<thead>
+						<tr>
+							<th>工號</th>
+							<th>姓名</th>
+							<th>分機</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="member in department">
+							<td>{{member.id}}</td>
+							<td>{{member.name}}</td>
+							<td>{{member.ext}}</td>
+						</tr>
+					</tbody>
+				</table>
+<pre>
+&lt;tr v-for="member in department"&gt;
+	&lt;td&gt;&#123; &#123; member.id &#125; &#125;&lt;/td&gt;
+	&lt;td&gt;&#123; &#123; member.name &#125; &#125;&lt;/td&gt;
+	&lt;td&gt;&#123; &#123; member.ext &#125; &#125;&lt;/td&gt;
+&lt;/tr&gt;
+</pre>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+	var example  = 
+		new Vue({
+			el : '#example',
+			data : {
+				message : 'My First Vue Example.',
+				url : 'https://google.com.tw/',
+				inputMessage : '',
+				textMessage : 'Text Message',
+				htmlMessage : '<img src="../images/favicon.png">',
+				counter : 0,
+				counterByMethod : 0,
+				isShow : false,
+				department : [
+					{id:"A3026", name:"Hans", ext:"3315"},
+					{id:"A4055", name:"Summer", ext:"2270"}
+				]
+			},
+			// define methods under the `methods` object
+			methods: {
+				addOneTimes: function (event) {
+				   alert('You have already clicked me about ' + this.counterByMethod + ' times!')
+				   this.counterByMethod ++;
+				},
+				toggleShow : function() {
+					this.isShow = !this.isShow;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

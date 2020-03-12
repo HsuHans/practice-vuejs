@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <title>My Second Vue Example</title>
+    <script src="https://unpkg.com/vue/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+    <link href="../images/favicon.png" rel="icon" type="image/x-icon">
+</head>
+
+<body>
+	<div id="example">
+		{{ message }}
+		<div>
+			<div>
+				案例：SA要求在列表結果頁多一個編輯按鈕，點擊後觸發可以編輯該筆資料事件。
+				在JQuery與Vue混和運用狀態下，若沒有注意DOM是否有被Vue重新產生的話會造成事件被重複註冊。
+				<table border="1">
+					<thead>
+						<tr>
+							<th>工號</th>
+							<th>姓名</th>
+							<th>分機</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="editMePlz" v-for="member in department">
+							<td>{{member.id}}</td>
+							<td>{{member.name}}</td>
+							<td>{{member.ext}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<button @click="initEdit">修改資料</button>
+				<button @click="nextPage">下一頁</button>
+				<button @click="clearData">清空</button>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<div id="solution">
+		{{ message }}
+		<div>
+			<div>
+				純粹使用Vue語法：
+				<table border="1">
+					<thead>
+						<tr>
+							<th>工號</th>
+							<th>姓名</th>
+							<th>分機</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr @click="showEvent ? alertYouCanEdit() : doNothing()" v-for="member in department">
+							<td>{{member.id}}</td>
+							<td>{{member.name}}</td>
+							<td>{{member.ext}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<button @click="initEdit">修改資料</button>
+				<button @click="nextPage">下一頁</button>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	<script type="text/javascript">
+	var department1 = [
+		{id:"A3026", name:"Hans", ext:"3315"},
+		{id:"A4055", name:"Summer", ext:"2270"}
+	];
+	var department2 = [
+		{id:"A9527", name:"唐伯虎", ext:"9527"},
+		{id:"A0314", name:"情人節", ext:"1314"}
+	];
+	var example  = 
+		new Vue({
+			el : '#example',
+			data : {
+				message : 'Event Listener Problem.',
+				department : department1
+			},
+			// define methods under the `methods` object
+			methods: {
+				initEdit: function (event) {
+					$(".editMePlz").each(function(index) {
+						$(this).on("click", function() {
+							alert("You Can Edit Me Now.");
+						});
+					});
+					alert("inited.")
+				},
+				nextPage : function() {
+					this.department = department2;
+				},
+				clearData : function() {
+					this.department = [];
+				}
+			}
+		});
+	var solution  = 
+		new Vue({
+			el : '#solution',
+			data : {
+				message : "One of Solution.",
+				showEvent : false,
+				department : department1
+			},
+			// define methods under the `methods` object
+			methods: {
+				initEdit: function (event) {
+					this.showEvent = true;
+					alert("inited.")
+				},
+				nextPage : function() {
+					this.showEvent = false;
+					this.department = department2;
+				},
+				doNothing : function() {
+					return false;
+				},
+				alertYouCanEdit : function() {
+					alert("You Can Edit Me Now.");
+				}
+			}
+		});
+	</script>
+</body>
+<script type="text/javascript" src="/third-party-js/jquery/dist/jquery.min.js"></script>
+</html>
