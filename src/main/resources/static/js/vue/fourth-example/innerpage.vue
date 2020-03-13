@@ -33,7 +33,7 @@
 				</ul>
 			</div>
 			<!-- 文字列表 -->
-			<list :pageResult="pageResult"></list>
+			<list :pageResult="pageResult" :loading="loading"></list>
 		</section>
 		<!-- LP End -->
 		<!-- Pagination -->
