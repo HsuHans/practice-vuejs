@@ -1,5 +1,7 @@
 # practice-vuejs
 
+ppt : https://github.com/HsuHans/practice-vuejs/raw/master/intro-to-vue.pptx
+
 # Run Vue Webpack
 使用下列連結步驟安裝npm
 
