@@ -15,7 +15,9 @@ wid -> npm run build-local-win
 
 成功後會輸出在 js-output folder
 
-# Build Local Maven Project with command line - for windows.
+# Build Local Maven Project with command line 
+  - for windows.
+  
 先參考下列連結安裝JDK與Maven
 
 https://mkyong.com/maven/how-to-install-maven-in-windows/
@@ -26,4 +28,5 @@ https://mkyong.com/maven/how-to-install-maven-in-windows/
 2. mvn clean install
 3. mvn spring-boot:run
 第三步驟為啟動server, started後可連以下路徑測試是否成功
+
 http://localhost:8080/first-example/index
