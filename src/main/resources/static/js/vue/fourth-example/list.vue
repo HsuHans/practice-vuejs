@@ -24,7 +24,8 @@ export default {
 			rows:[],
 			totalPage: 10,
 			currentPage:1
-		}
+		},
+		loading :false
 	},
 	mounted(){
 	},

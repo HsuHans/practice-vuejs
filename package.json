@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-local": "NODE_ENV=local webpack --progress --watch"
+    "build-local": "vue=debug NODE_ENV=local webpack --progress --watch",
+    "build-local-win": "set vue=debug && webpack --NODE_ENV=local --progress --watch"
   },
   "author": "",
   "license": "ISC",
